@@ -6,11 +6,11 @@ body {
 
 ul {
     text-decoration: wavy;
-    color:chartreuse
+    color: yellow;
 }
 
 img {
-   border: solid yellow 100px;
+   border: solid black 20px;
 
 }
 
@@ -19,13 +19,14 @@ h1 {font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida 
 }
 
 a {
-    color: yellowgreen;
+    color: yellow;
+    text-decoration: none;
 
 }
 
 a:hover {
     text-decoration: underline;
-    color: aquamarine;
+    color: goldenrod;
 }
 
 .footer {
@@ -33,7 +34,7 @@ a:hover {
     left: 0px;
     right: 0px;
     bottom: 0px;
-    height: 100px;
+    height: 50px;
     background-color: black;
 }
 .header {
@@ -48,10 +49,10 @@ a:hover {
 }
 .mainbody {
     position: absolute;
-    left: 0px;
+    left: 10px;
     right: 0px;
     top: 100px;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
 
 .nav {

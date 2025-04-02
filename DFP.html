@@ -1,6 +1,4 @@
-
-    <h1> Hello! <a href="personal.html">Back to Dorito Town!</a></h1>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +8,16 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: blue;
+            background-color: rgb(1, 22, 138);
             color: white;
+        }
+        a {
+            color: yellow;
+            text-decoration: none;
+        }
+        a:hover {
+            color: goldenrod;
+            text-decoration: underline;
         }
         .container {
             max-width: 500px;
@@ -40,26 +46,43 @@
         button:hover {
             background-color: #d94300;
         }
-        a {
-            color: black;
+        .game-over {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: red;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <h1> Hello! <a href="personal.html">Back to Dorito Town!</a></h1>
     <div class="container">
         <h1>Doritos Catch Game</h1>
         <p>Move the basket left and right to catch falling Doritos!</p>
         <canvas id="gameCanvas" width="400" height="400"></canvas>
         <p>Score: <span id="score">0</span></p>
-        <button onclick="startGame()">Start Game</button>
+        <button id="startButton" onclick="startGame()">Start Game</button>
+        <div class="game-over" id="gameOverScreen">
+            <p>Game Over! Your score: <span id="finalScore">0</span></p>
+            <button onclick="startGame()">Restart</button>
+        </div>
     </div>
 
     <script>
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
+        const gameOverScreen = document.getElementById("gameOverScreen");
+        const scoreDisplay = document.getElementById("score");
+        const finalScoreDisplay = document.getElementById("finalScore");
+        const startButton = document.getElementById("startButton");
 
         let basket = { x: 175, y: 350, width: 50, height: 20 };
-        let dorito = { x: Math.random() * 350, y: 0, width: 20, height: 20, speed: 2 };
+        let dorito = { x: Math.random() * 350, y: 0, width: 20, height: 20, speed: 6 };
         let score = 0;
         let gameInterval;
 
@@ -96,12 +119,12 @@
             
             if (dorito.y + dorito.height >= basket.y && dorito.x > basket.x && dorito.x < basket.x + basket.width) {
                 score++;
-                document.getElementById("score").innerText = score;
+                scoreDisplay.innerText = score;
                 resetDorito();
             }
 
             if (dorito.y > canvas.height) {
-                resetDorito();
+                endGame();
             }
         }
 
@@ -112,10 +135,22 @@
 
         function startGame() {
             score = 0;
-            document.getElementById("score").innerText = score;
+            scoreDisplay.innerText = score;
+            gameOverScreen.style.display = "none";
+            canvas.style.display = "block";
+            startButton.style.display = "none";
             resetDorito();
             clearInterval(gameInterval);
             gameInterval = setInterval(updateGame, 30);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            finalScoreDisplay.innerText = score;
+            gameOverScreen.style.display = "block";
+            canvas.style.display = "none";
+            startButton.style.display = "block";
+            print();
         }
     </script>
 </body>
